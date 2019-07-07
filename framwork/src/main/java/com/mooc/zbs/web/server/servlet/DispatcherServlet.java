@@ -3,7 +3,7 @@ package com.mooc.zbs.web.server.servlet;
 import javax.servlet.*;
 import java.io.IOException;
 
-public class TestServlet implements Servlet {
+public class DispatcherServlet implements Servlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
 
