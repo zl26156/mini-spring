@@ -5,6 +5,7 @@ import com.mooc.zbs.web.server.handler.MappingHandler;
 
 import javax.servlet.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class DispatcherServlet implements Servlet {
     @Override
@@ -19,9 +20,18 @@ public class DispatcherServlet implements Servlet {
 
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+        //请求过来后用这些handler依次判断能否响应请求，如能处理，就响应结果
         for (MappingHandler mappingHandler: HandlerManager.mappingHandlerList){
-            if (mappingHandler.handle(req,res)){
-                return;
+            try {
+                if (mappingHandler.handle(req,res)){
+                    return;
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
         }
     }

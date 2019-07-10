@@ -22,7 +22,7 @@ public class TomcatServer {
 
         //创建tomcat和servlet的联系
         Context context = new StandardContext();//创建容器，用tomcat自带的标准context容器就行
-        context.setPath("");//设置录机
+        context.setPath("");//设置路径
         context.addLifecycleListener( new Tomcat.FixContextListener());//设置生命周期监听器，用默认的监听器
         DispatcherServlet servlet = new DispatcherServlet();
         //将TestServlet注入到context容器内，这里用Tomcat自带的静态方法addServlet
