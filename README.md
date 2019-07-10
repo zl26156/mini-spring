@@ -1,2 +1,5 @@
 # mini-spring
 纯手写一个springmvc框架
+开发工具用idea
+项目管理用gradle
+tomcat服务器仿照springBoot的风格，直接用gradle内部集成了。
