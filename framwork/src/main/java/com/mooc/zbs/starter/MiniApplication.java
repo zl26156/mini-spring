@@ -1,5 +1,6 @@
 package com.mooc.zbs.starter;
 
+import com.mooc.zbs.beans.BeanFactory;
 import com.mooc.zbs.core.ClassScanner;
 import com.mooc.zbs.web.server.TomcatServer;
 import com.mooc.zbs.web.server.handler.HandlerManager;
@@ -19,11 +20,15 @@ public class MiniApplication {
             tomcatServer.startServer();
             //获取所有包下的类
             List<Class<?>> classList = ClassScanner.scanClasses(cls.getPackage().getName());
+            //初始化所有的bean
+            BeanFactory.intiBean(classList);
             //初始化所有MappingHandler，resolv方法里会筛选出controller类
             HandlerManager.resolveMappingHandler(classList);
             //输出获取类的名称
             classList.forEach(it-> System.out.println(it.getName()));
         } catch (LifecycleException | IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -1,6 +1,9 @@
 package com.mooc.zbs.web.server.handler;
 
 
+import com.mooc.zbs.beans.BeanFactory;
+import com.mooc.zbs.web.server.mvc.Controller;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,8 @@ public class MappingHandler {
         }
 
         //实例化controller
-        Object ctl = controller.newInstance();
+        //Object ctl = controller.newInstance();
+        Object ctl = BeanFactory.getBean(controller);
         //用Object来存储结果
         Object response = method.invoke(ctl,parameters);
         //方法返回的结果放回到ServletResponse 中去
